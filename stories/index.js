@@ -11,6 +11,7 @@ import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
 
+//BUTTON Story
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -27,6 +28,7 @@ storiesOf("Button", module)
     </Button>
   ));
 
+  //DAY LIST ITEMS Story
 storiesOf("DayListItem", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -37,6 +39,8 @@ storiesOf("DayListItem", module)
   .add("Clickable", () => (
     <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} />
   ));
+
+  //DAY LIST Data & Story
   const days = [
     {
       id: 1,
@@ -69,6 +73,7 @@ storiesOf("DayListItem", module)
         <DayList days={days} day={"Wednesday"} onChange={action("setDay")} />
   ));
   
+  //INTERVIEWER LIST ITEMS Data & Story
   const interviewer = {
     id: 1,
     name: "Sylvia Palmer",
@@ -102,6 +107,7 @@ storiesOf("DayListItem", module)
       />
     ));
   
+  //INTERVIEWER LIST Data & Story
   const interviewers = [
     { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
     { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
@@ -128,6 +134,6 @@ storiesOf("DayListItem", module)
     .add("Clickable", () => (
       <InterviewerList
         interviewers={interviewers}
-        setInterviewer={action("setInterviewer")}
+        onChange={action("setInterviewer")}
       />
     ));
