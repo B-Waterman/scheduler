@@ -2,6 +2,9 @@ import React from "react";
 
 //Allows user to see existing appointment(s)
 export default function Show(props) {
+  const interviewer = props.interviewer.map(interviewerObject => interviewerObject.interviewer);
+  console.log("Which interviewer?", interviewer);
+
   return (
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">
