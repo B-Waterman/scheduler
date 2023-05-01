@@ -10,6 +10,8 @@ import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
+import Appointment from "components/Appointment/index.js";
+import Header from "components/Appointment/Header";
 
 //BUTTON Story
 storiesOf("Button", module)
@@ -70,7 +72,7 @@ storiesOf("DayListItem", module)
       <DayList days={days} day={"Tuesday"} onChange={action("setDay")} />
     ))
     .add("Wednesday", () => (
-        <DayList days={days} day={"Wednesday"} onChange={action("setDay")} />
+      <DayList days={days} day={"Wednesday"} onChange={action("setDay")} />
   ));
   
   //INTERVIEWER LIST ITEMS Data & Story
@@ -137,3 +139,13 @@ storiesOf("DayListItem", module)
         onChange={action("setInterviewer")}
       />
     ));
+
+  //APPOINTMENT Stories
+  storiesOf("Appointment", module)
+  .addParameters({
+    backgrounds: [{ name: "white", value: "#fff", default: true }]
+  })
+  .add("Appointment", () => <Appointment />)
+  .add("Appointment with Time", () => <Appointment time="12pm" />)
+  .add("Header", () => <Header time="12pm" />)
+  .add("Empty", () => <Empty onAdd={action("onAdd")} />);
