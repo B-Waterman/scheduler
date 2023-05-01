@@ -1,5 +1,6 @@
 import React from "react";
 
+//Allows user to choose which time slot to book with interviewer
 export default function Empty(props) {
   return (
     <main className="appointment__add">
