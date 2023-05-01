@@ -15,6 +15,7 @@ import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
 import Confirm from "components/Appointment/Confirm";
+import Status from "components/Appointment/Status";
 
 //BUTTON Story
 storiesOf("Button", module)
@@ -164,5 +165,10 @@ storiesOf("DayListItem", module)
       message="Are you sure you want to delete this appointment?"
       onConfirm={action("onConfirm")}
       onCancel={action("onCancel")}
+    />
+  ))
+  .add("Status", () => (
+    <Status
+      message="Deleting... one moment please"
     />
   ))
