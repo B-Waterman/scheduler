@@ -89,7 +89,7 @@ export default function Application(props) {
             days={days}
             value={day}
             onChange={setDay}
-          />
+            />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
