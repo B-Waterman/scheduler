@@ -61,20 +61,20 @@ const appointments = {
   }
 };
 
-
-const apptComponents = Object.values(appointments).map((appointment) => {
-  return (
-    <Appointment
-      key={appointment.id}
-      {...appointment.id}
-      {...appointment.time}
-      {...appointment.interview}
-    />
-  )
-});
-
 export default function Application(props) {
+
   const [day, setDay] = useState("Monday");
+
+  const apptComponents = Object.values(appointments);
+  const appointment= apptComponents.map(appt => {
+    return (
+      <Appointment
+        key={appt.id}
+        {...appt}
+      />
+    )
+  });
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -98,7 +98,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {apptComponents}
+        {appointment}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
