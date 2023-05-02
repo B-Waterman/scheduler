@@ -1,7 +1,5 @@
 import React from "react";
-
 import classNames from "classnames";
-
 import "components/DayListItem.scss";
 
 const formatSpots = function(spots) {
@@ -29,5 +27,5 @@ export default function DayListItem(props) {
       <h2 className="text--regular">{props.name}</h2>
       <h3 className="text--light">{spotsRemaining}</h3>
     </li>
-  );
-}
+  )
+};
