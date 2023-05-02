@@ -13,6 +13,6 @@ export default function DayList(props) {
         setDay={day.onChange}
       />
       )
-    })
+    });
   return <ul>{days}</ul>
 };
