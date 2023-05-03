@@ -29,7 +29,7 @@ export default function Application(props) {
     })
   }, []);
 
-  const dailyAppointments = getAppointmentsForDay(state, day);
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
   const schedule = dailyAppointments.map(appt => {
     const interview = getInterview(state, appt.interview);
     return (
