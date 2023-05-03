@@ -6,45 +6,6 @@ import DayList from "./DayList";
 import Appointment from "./Appointment";
 
 
-const appointments = {
-  "1": {
-    id: 1,
-    time: "12pm",
-  },
-  "2": {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer: {
-        id: 3,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  "3": {
-    id: 3,
-    time: "2pm",
-  },
-  "4": {
-    id: 4,
-    time: "3pm",
-    interview: {
-      student: "Archie Andrews",
-      interviewer: {
-        id: 4,
-        name: "Cohana Roy",
-        avatar: "https://i.imgur.com/FK8V841.jpg",
-      }
-    }
-  },
-  "5": {
-    id: 5,
-    time: "4pm",
-  }
-};
-
 export default function Application(props) {
 
   const [state, setState] = useState({
@@ -52,21 +13,21 @@ export default function Application(props) {
     day: "Monday",
     appointments: {}
   });
-  const setDay = day => setState({...state, day});
-  const setDays = days => setState(prev => ({...prev, days}));
+  const setDay = day => setState({ ...state, day });
+  const setDays = days => setState(prev => ({ ...prev, days }));
 
 
   useEffect(() => {
-      axios.get('https://localhost:8001/api/days')
-        .then(res => {
-          setDays(res.data);
-          console.log(res.data);
-        })
-        .catch(error => console.log(error))
-    }, []);
+    Promise.all([
+      axios.get('https://localhost:8001/api/days'),
+      axios.get('https://localhost:8001/api/appointments')
+    ]).then((resDays, resAppts) => {
+      setState(prev => ({ ...prev, days: resDays.data, appointments: resAppts.data }));
+    })
+  }, []);
 
   const apptComponents = Object.values(appointments);
-  const appointment= apptComponents.map(appt => {
+  const appointment = apptComponents.map(appt => {
     return (
       <Appointment
         key={appt.id}
@@ -89,7 +50,7 @@ export default function Application(props) {
             days={state.days}
             value={state.day}
             onChange={setDay}
-            />
+          />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
