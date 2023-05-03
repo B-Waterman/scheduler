@@ -47,6 +47,7 @@ const appointments = {
 
 export default function Application(props) {
 
+  const [day, setDay] = useState('Monday');
   const [days, setDays] = useState([]);
 
   useEffect(() => {
