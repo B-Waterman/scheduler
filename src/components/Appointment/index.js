@@ -20,6 +20,7 @@ export default function Appointment({ time, interview, interviewers, id, name, v
   const SAVING = "SAVING";
   const DELETING = "DELETING";
   const CONFIRM = "CONFIRM";
+  const EDIT = "EDIT";
 
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY);
@@ -58,6 +59,7 @@ export default function Appointment({ time, interview, interviewers, id, name, v
           student={interview.student}
           interviewer={interview.interviewer}
           onDelete={deleteConfirmation}
+          onEdit={() => transition(EDIT)}
         />
       )}
       {mode === CREATE && (
@@ -83,6 +85,15 @@ export default function Appointment({ time, interview, interviewers, id, name, v
           message="Do you want to delete this interview? It may not be available later."
           onConfirm={deleteInterview}
           onCancel={() => back()}
+        />
+      )}
+      {mode === EDIT && (
+        <Form
+          name={interview.student}
+          interviewers={interviewers}
+          interviewer={interview.interviewer}
+          onCancel={() => back()}
+          onSave={saveInterview}
         />
       )}
     </article>
