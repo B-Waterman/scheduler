@@ -11,12 +11,13 @@ import Form from "./Form";
 import Status from "./Status";
 
 
-export default function Appointment({ time, interview, interviewers, id, name, value, bookInterview }) {
+export default function Appointment({ time, interview, interviewers, id, name, value, bookInterview, cancelInterview }) {
 
   const SHOW = "SHOW";
   const EMPTY = "EMPTY";
   const CREATE = "CREATE";
   const SAVING = "SAVING";
+  const DELETING = "DELETING"
 
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY);
@@ -29,11 +30,17 @@ export default function Appointment({ time, interview, interviewers, id, name, v
     };
     bookInterview(id, interview);
     transition(SAVING)
-    Promise.resolve(props.bookInterview(id, interview))
+    Promise.resolve(bookInterview(id, interview))
       .then(() => transition(SHOW))
       .catch(error => console.log(error));
   }
 
+  function deleteInterview() {
+    transition(DELETING);
+    Promise.resolve(cancelInterview(id))
+      .then(() => transition(EMPTY))
+      .catch(error => console.log(error));
+  }
 
   return (
     <article className="appointment">
@@ -41,8 +48,10 @@ export default function Appointment({ time, interview, interviewers, id, name, v
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
         <Show
+          id={id}
           student={interview.student}
           interviewer={interview.interviewer}
+          onDelete={deleteInterview}
         />
       )}
       {mode === CREATE && (
@@ -56,6 +65,11 @@ export default function Appointment({ time, interview, interviewers, id, name, v
       {mode === SAVING && (
         <Status
           message={"Saving"}
+        />
+      )}
+      {mode === DELETING && (
+        <Status
+          message={"Deleting"}
         />
       )}
     </article>
