@@ -12,19 +12,19 @@ const formatSpots = function(spots) {
   return `${spots} spots remaining`;
 };
 
-export default function DayListItem(props) {
+export default function DayListItem({name, selected, setDay, spots}) {
 
-  console.log(props);
+  // console.log("DayListItem", props);
 
-  const spotsRemaining = formatSpots(props.spots);
+  const spotsRemaining = formatSpots(spots);
 
   let dayClass = classNames("day-list__item", {
-    "day-list__item--selected": props.selected,
-    "day-list__item--full": !props.spots
+    "day-list__item--selected": selected,
+    "day-list__item--full": !spots
   });
   return (
-    <li onClick={() => props.setDay(props.name)} className={dayClass} selected={props.selected}>
-      <h2 className="text--regular">{props.name}</h2>
+    <li onClick={() => setDay(name)} className={dayClass} selected={selected}>
+      <h2 className="text--regular">{name}</h2>
       <h3 className="text--light">{spotsRemaining}</h3>
     </li>
   );
