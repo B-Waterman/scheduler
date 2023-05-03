@@ -8,7 +8,7 @@ import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
-
+import Status from "./Status";
 
 
 export default function Appointment({ time, interview, interviewers, id, name, value, bookInterview }) {
@@ -16,6 +16,7 @@ export default function Appointment({ time, interview, interviewers, id, name, v
   const SHOW = "SHOW";
   const EMPTY = "EMPTY";
   const CREATE = "CREATE";
+  const SAVING = "SAVING";
 
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY);
@@ -27,7 +28,10 @@ export default function Appointment({ time, interview, interviewers, id, name, v
       interviewer
     };
     bookInterview(id, interview);
-    transition(SHOW)
+    transition(SAVING)
+    Promise.resolve(props.bookInterview(id, interview))
+      .then(() => transition(SHOW))
+      .catch(error => console.log(error));
   }
 
 
@@ -49,7 +53,11 @@ export default function Appointment({ time, interview, interviewers, id, name, v
           onSave={save}
         />
       )}
-
+      {mode === SAVING && (
+        <Status
+          message={"Saving"}
+        />
+      )}
     </article>
   );
 };
