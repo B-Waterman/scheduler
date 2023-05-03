@@ -30,19 +30,19 @@ export default function Form({interviewers, name, onCancel, onSave, ...rest}) {
             type="text"
             onChange={(event) => setStudent(event.target.value)}
             placeholder="Enter Student Name"
-            student={rest.student}
+            student={student}
           />
         </form>
         <InterviewerList
           interviewers={interviewers}
-          interviewer={rest.interviewer}
+          interviewer={interviewer}
           onChange={setInterviewer}
         />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={() => onSave(rest.student, rest.interviewer)}>Save</Button>
+          <Button confirm onClick={() => onSave(student, interviewer)}>Save</Button>
         </section>
       </section>
     </main>

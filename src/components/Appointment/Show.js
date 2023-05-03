@@ -1,9 +1,13 @@
 import React from "react";
 
 //Allows user to see existing appointment(s)
-export default function Show(props) {
-  const interviewer = props.interviewer.map(interviewerObject => interviewerObject.interviewer);
-  console.log("Which interviewer?", interviewer);
+export default function Show({interviewer, onEdit, onDelete}) {
+
+  // console.log("show", props);
+
+  // const interviewer = interviewer.map(interviewerObject => interviewerObject.interviewer);
+
+  // console.log("Which interviewer?", interviewer);
 
   return (
     <main className="appointment__card appointment__card--show">
@@ -20,13 +24,13 @@ export default function Show(props) {
             className="appointment__actions-button"
             src="images/edit.png"
             alt="Edit"
-            onClick={props.onEdit}
+            onClick={onEdit}
           />
           <img
             className="appointment__actions-button"
             src="images/trash.png"
             alt="Delete"
-            onClick={props.onDelete}
+            onClick={onDelete}
           />
         </section>
       </section>
