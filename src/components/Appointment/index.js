@@ -36,25 +36,19 @@ export default function Appointment({ time, interview, interviewers, id, name, v
     };
     bookInterview(id, interview);
     transition(SAVING)
-    Promise.resolve(bookInterview(id, interview))
+    bookInterview(id, interview)
       .then(() => transition(SHOW))
       .catch(error => {
         transition(ERROR_SAVE, true)
-        console.log(error)
       });
-  }
-
-  function deleteConfirmation() {
-    transition(CONFIRM)
   }
 
   function deleteInterview() {
     transition(DELETING, true);
-    Promise.resolve(cancelInterview(id))
+    cancelInterview(id)
       .then(() => transition(EMPTY))
       .catch(error => {
         transition(ERROR_DELETE, true)
-        console.log(error)
       });
   }
 
