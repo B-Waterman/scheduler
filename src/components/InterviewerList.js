@@ -4,16 +4,15 @@ import InterviewerListItem from "./InterviewerListItem";
 
 export default function InterviewerList({onChange, value, ...rest}) {
 
-  // console.log("InterviewerList", InterviewerList);
+  const renderedInterviewers = rest.interviewers.map(({id, name, avatar}) => {
 
-  const interviewers = rest.interviewers.map(({id, name, avatar,}) => {
     return (
       <InterviewerListItem
         key={id}
         name={name}
         avatar={avatar}
-        setInterviewer={() => onChange(id)}
         selected={id === value}
+        setInterviewer={() => onChange(id)}
       />
     )
   })
@@ -21,7 +20,7 @@ export default function InterviewerList({onChange, value, ...rest}) {
   return (
   <section className="interviewers">
     <h4 className="interviewers__header text--light">Interviewers</h4>
-    <ul className="interviewers__list">{interviewers}</ul>
+    <ul className="interviewers__list">{renderedInterviewers}</ul>
   </section>
   )
 };
