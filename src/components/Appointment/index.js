@@ -64,12 +64,12 @@ export default function Appointment({ time, interview, interviewers, id, name, v
       )}
       {mode === SAVING && (
         <Status
-          message={"Saving"}
+          message="Saving"
         />
       )}
       {mode === DELETING && (
         <Status
-          message={"Deleting"}
+          message="Deleting"
         />
       )}
     </article>
