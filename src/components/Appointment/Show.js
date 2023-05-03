@@ -36,4 +36,4 @@ export default function Show({interviewer, onEdit, onDelete}) {
       </section>
     </main>
   );
-};
+}

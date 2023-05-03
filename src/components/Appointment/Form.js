@@ -47,4 +47,4 @@ export default function Form({interviewers, name, onCancel, onSave, ...rest}) {
       </section>
     </main>
   );
-};
+}
