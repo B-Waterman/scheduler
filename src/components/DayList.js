@@ -3,13 +3,7 @@ import React from "react";
 import DayListItem from "./DayListItem";
 
 export default function DayList({onChange, value, days}) {
-
-  // console.log("Daylist props", rest)
-
   const renderedDays = days.map(({id, name, spots}) => {
-
-    // console.log("day", day)
-
     return (
       <DayListItem
         key={id}

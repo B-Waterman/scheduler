@@ -1,9 +1,9 @@
 import React from "react";
-import './InterviewerList.scss';
 import InterviewerListItem from "./InterviewerListItem";
 
-export default function InterviewerList({onChange, value, ...rest}) {
+import './InterviewerList.scss';
 
+export default function InterviewerList({onChange, value, ...rest}) {
   const renderedInterviewers = rest.interviewers.map(({id, name, avatar}) => {
 
     return (
