@@ -15,7 +15,7 @@ export function getInterview(state, interview) {
     interviewSlot.interviewer =
   state.interviewers[interviewSlot.interviewer]
   }
-  return
+  return interviewSlot;
 };
 
 export function getInterviewersForDay(state, day) {
