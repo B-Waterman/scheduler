@@ -12,6 +12,22 @@ export default function useApplicationData() {
 
   const setDay = day => setState({ ...state, day });
 
+  function updateSpots(state, id, appointments) {
+    const days = [...state.days]
+    const dayOfWeek = days.findIndex((day) => day.appointments.includes(id));
+    const dayAppt = days[dayOfWeek].appointments;
+    const spots = Object.keys(appointments).reduce((total, key) =>
+    {
+      const apptKey = appointments[key];
+      if (dayAppt.includes(apptKey.id) && !apptKey.interview) {
+        return total + 1;
+      }
+      return total;
+    }, 0)
+    days[dayOfWeek] = { ...days[dayOfWeek], spots}
+    return days;
+  }
+
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -23,7 +39,10 @@ export default function useApplicationData() {
     };
     return axios
     .put(`/api/appointments/${id}`, { interview })
-    .then(() => setState({ ...state, appointments }))
+    .then((res) => {
+      const days = updateSpots(state, id, appointments);
+      setState({ ...state, appointments })
+    })
     .catch(error => console.log(error));
   };
 
@@ -34,12 +53,15 @@ export default function useApplicationData() {
     };
     const appointments = {
       ...state.appointments,
-      [id]: appointments
+      [id]: appointment
     };
     return axios
     .put(`/api/appointments/${id}`)
-    .then(() => setState({ ...state, appointments }))
-    .catch(err => console.log(err));
+    .then((res) => {
+      const days = updateSpots(state, id, appointments);
+      setState({ ...state, appointments })
+    })
+    .catch(error => console.log(error));
   };
 
   useEffect(() => {
