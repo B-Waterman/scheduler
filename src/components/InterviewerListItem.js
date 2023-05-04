@@ -3,26 +3,22 @@ import classNames from "classnames";
 
 import "./InterviewerListItem.scss"
 
-export default function InterviewerListItem({selected, setInterviewer, id, name, avatar}) {
+export default function InterviewerListItem({selected, setInterviewer, name, id, avatar}) {
 
-  const Classes = classNames("interviewers__item", {
+  let interviewerClass = classNames("interviewers__item", {
     "interviewers__item--selected": selected
-  })
-  // console.log(
-  // let interviewerClass = classNames("interviewers__item", {
-  //   "interviewers__item--selected": selected
-  // },)
+  });
 
-  // let imageClass = classNames("interviewers__item-image", {
-  //   "interviewers__item-image--selected": selected
-  // })
+  let imageClass = classNames("interviewers__item-image", {
+    "interviewers__item-image--selected": selected
+  });
 
   return (
-    <li className={Classes} onClick={setInterviewer}>
+    <li className={interviewerClass} onClick={setInterviewer}>
       <img
-        className={"interviewers__item-image"}
+        className={imageClass}
         src={avatar}
-        alt={name}
+        alt={id}
       />
       {selected && name}
     </li>
