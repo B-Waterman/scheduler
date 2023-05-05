@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 import "./InterviewerListItem.scss"
 
-export default function InterviewerListItem({selected, setInterviewer, name, id, avatar}) {
+export default function InterviewerListItem({selected, setInterviewer, name, avatar}) {
 
   let interviewerClass = classNames("interviewers__item", {
     "interviewers__item--selected": selected
@@ -18,7 +18,7 @@ export default function InterviewerListItem({selected, setInterviewer, name, id,
       <img
         className={imageClass}
         src={avatar}
-        alt={id}
+        alt={name}
       />
       {selected && name}
     </li>
