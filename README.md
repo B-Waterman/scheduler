@@ -1,5 +1,10 @@
 # Interview Scheduler
 
+## Project Summary
+Interview Scheduler is a SPA (Single Page Application) for tracking students interviews built with the latest tools and techniques for optimized user experience.
+
+---
+
 ## Setup
 
 Install dependencies with `npm install`.
