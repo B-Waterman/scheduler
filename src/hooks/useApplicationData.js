@@ -38,10 +38,10 @@ export default function useApplicationData() {
       [id]: appointment
     };
     return axios
-    .put(`/api/appointments/${id}`, { interview })
+    .put(`http://localhost:8001/api/appointments/${id}`, { interview })
     .then((res) => {
       const days = updateSpots(state, id, appointments);
-      setState({ ...state, appointments })
+      setState({ ...state, appointments, days })
     })
     .catch(error => console.log(error));
   };
@@ -56,10 +56,10 @@ export default function useApplicationData() {
       [id]: appointment
     };
     return axios
-    .put(`/api/appointments/${id}`)
+    .put(`http://localhost:8001/api/appointments/${id}`)
     .then((res) => {
       const days = updateSpots(state, id, appointments);
-      setState({ ...state, appointments })
+      setState({ ...state, appointments, days })
     })
     .catch(error => console.log(error));
   };

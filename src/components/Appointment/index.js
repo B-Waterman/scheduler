@@ -12,8 +12,8 @@ import Status from "./Status";
 import Confirm from "./Confirm";
 import Error from "./Error";
 
-
-export default function Appointment({ time, interview, interviewers, id, name, value, bookInterview, cancelInterview }) {
+//interview may be a lone var or prop. All other props destructured inline
+export default function Appointment({ id, name, value, time, interviewers, bookInterview, cancelInterview, ...rest }) {
 
   const SHOW = "SHOW";
   const EMPTY = "EMPTY";
@@ -26,16 +26,15 @@ export default function Appointment({ time, interview, interviewers, id, name, v
   const ERROR_DELETE = "ERROR_DELETE"
 
   const { mode, transition, back } = useVisualMode(
-    interview ? SHOW : EMPTY);
+    rest.interview ? SHOW : EMPTY);
 
-
+  //Save interview - takes in the interivew object and name. A new interview appointment transitions from saving to to show once API call is completed.
   function saveInterview(name, interviewer) {
     const interview = {
       student: name,
       interviewer
     };
-    bookInterview(id, interview);
-    transition(SAVING)
+    transition(SAVING);
     bookInterview(id, interview)
       .then(() => transition(SHOW))
       .catch(error => {
@@ -43,6 +42,7 @@ export default function Appointment({ time, interview, interviewers, id, name, v
       });
   }
 
+  //Delete interview - a new interview appointment transitions to deleting, waits for a cancellation request to return from server then transitions to empty.
   function deleteInterview() {
     transition(DELETING, true);
     cancelInterview(id)
@@ -52,59 +52,68 @@ export default function Appointment({ time, interview, interviewers, id, name, v
       });
   }
 
+
   return (
     <article className="appointment">
       <Header time={time} />
-      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+
       {mode === SHOW && (
         <Show
           id={id}
-          student={interview.student}
-          interviewer={interview.interviewer}
+          student={rest.interview.student}
+          interviewer={rest.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
         />
       )}
+
+      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+
       {mode === CREATE && (
-        <Form interviewers={interviewers}
-          name={name}
-          value={value}
-          onCancel={() => back()}
+        <Form
+          interviewers={interviewers}
+          onCancel={back}
           onSave={saveInterview}
         />
       )}
+
       {mode === SAVING && (
         <Status
           message="Saving"
         />
       )}
+
       {mode === DELETING && (
         <Status
           message="Deleting"
         />
       )}
+
       {mode === CONFIRM && (
         <Confirm
-          message="Do you want to delete this interview? It may not be available later."
+          message="Are you sure you would like to delete this interview? It may not be available later."
           onConfirm={deleteInterview}
-          onCancel={() => back()}
+          onCancel={back}
         />
       )}
+
       {mode === EDIT && (
         <Form
-          name={interview.student}
+          name={name ? name : rest.interview.student}
+          interviewer={rest.interview.interviewer}
           interviewers={interviewers}
-          interviewer={interview.interviewer}
-          onCancel={() => back()}
+          onCancel={back}
           onSave={saveInterview}
         />
       )}
+
       {mode === ERROR_SAVE && (
         <Error
           message="Error: Cannot save interview appointment."
-          onClose={() => back()}
+          onClose={back}
         />
       )}
+
       {mode === ERROR_DELETE && (
         <Error
           message="Error: Cannot delete interview appointment."

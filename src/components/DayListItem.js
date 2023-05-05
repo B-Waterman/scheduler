@@ -16,12 +16,17 @@ const formatSpots = function(spots) {
 export default function DayListItem({name, selected, setDay, spots}) {
   const spotsRemaining = formatSpots(spots);
 
-  let dayClass = classNames("day-list__item", {
+  const dayClass = classNames("day-list__item", {
     "day-list__item--selected": selected,
     "day-list__item--full": !spots
   });
+
   return (
-    <li onClick={() => setDay(name)} className={dayClass} selected={selected}>
+    <li
+      onClick={() => setDay(name)}
+      className={dayClass}
+      selected={selected}
+    >
       <h2 className="text--regular">{name}</h2>
       <h3 className="text--light">{spotsRemaining}</h3>
     </li>
