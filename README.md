@@ -1,7 +1,19 @@
 # Interview Scheduler
 
 ## Project Summary
-Interview Scheduler is a SPA (Single Page Application) for tracking students interviews built with the latest tools and techniques for optimized user experience.
+Interview Scheduler is a SPA (Single Page Application) where you can create, edit, and track student interviews.
+
+### View the weekly schedule!
+!["Interview Schedule"](https://github.com/B-Waterman/scheduler/blob/master/docs/InterviewSchedule.png?raw=true)
+
+### Book an interview of your own!
+!["Book an interview"](https://github.com/B-Waterman/scheduler/blob/master/docs/BookInterview.png?raw=true)
+
+### Edit existing interviews!
+!["Edit Interiew"](https://github.com/B-Waterman/scheduler/blob/master/docs/EditInterview.png?raw=true)
+
+### A confirmation request will be made ahead of deletion!
+!["Delete Confirm"](https://github.com/B-Waterman/scheduler/blob/master/docs/DeleteInterview.png?raw=true)
 
 ---
 
