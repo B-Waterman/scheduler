@@ -11,11 +11,7 @@ export default function InterviewerList({interviewers, onChange, value}) {
     interviewers: PropTypes.array.isRequired
   };
 
-//If interviewers' name = undefined, may not be array? This may fix bug
-  // const intArr = Object.values(interviewers);
   const renderedInterviewers = interviewers.map(({id, name, avatar}) => {
-    console.log("id", id);
-    console.log("value", value);
     return (
       <InterviewerListItem
         key={id}
