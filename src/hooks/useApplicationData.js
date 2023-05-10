@@ -39,11 +39,10 @@ export default function useApplicationData() {
     };
     return axios
     .put(`http://localhost:8001/api/appointments/${id}`, { interview })
-    .then(() => {
+    .then((res) => {
       const days = updateSpots(state, id, appointments);
       setState({ ...state, appointments, days })
     })
-    .catch(error => console.log(error));
   };
 
   function cancelInterview(id) {
@@ -56,12 +55,11 @@ export default function useApplicationData() {
       [id]: appointment
     };
     return axios
-    .delete(`http://localhost:8001/api/appointments/${id}`)
-    .then(() => {
+    .put(`http://localhost:8001/api/appointments/${id}`)
+    .then((res) => {
       const days = updateSpots(state, id, appointments);
       setState({ ...state, appointments, days })
     })
-    .catch(error => console.log(error));
   };
 
   useEffect(() => {
