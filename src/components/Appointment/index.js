@@ -117,7 +117,7 @@ export default function Appointment({ id, name, value, time, interviewers, bookI
       {mode === ERROR_DELETE && (
         <Error
           message="Error: Cannot delete interview appointment."
-          onClose={() => back()}
+          onClose={back}
         />
       )}
     </article>
