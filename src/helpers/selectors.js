@@ -1,12 +1,16 @@
-export function getAppointmentsForDay(state, day) {
-  const dayAppointments = [];
-  const dayAppointmentID = state.days.find((element) => element.name === day)?.appointments || undefined;
+export function getDailyInfo(state, day, dayObject) {
+  const dayArray = [];
+  const dayObjectID = state.days.find((element) => element.name === day)?.appointments || undefined;
 
-  dayAppointmentID && dayAppointmentID.forEach((id) => {
-    dayAppointments.push(state.appointments[id])
+  dayObjectID && dayObjectID.forEach((id) => {
+    dayArray.push(dayObject[id])
   });
 
-  return dayAppointments;
+  return dayArray;
+}
+
+export function getAppointmentsForDay(state, day) {
+  return getDailyInfo(state, day, state.appointments);
 };
 
 export function getInterview(state, interview) {
@@ -19,12 +23,5 @@ export function getInterview(state, interview) {
 };
 
 export function getInterviewersForDay(state, day) {
-  const dayInterviewers = [];
-  const dayInterviewersID = state.days.find((element) => element.name === day)?.interviewers || undefined;
-
-  dayInterviewersID && dayInterviewersID.forEach((id) => {
-    dayInterviewers.push(state.interviewers[id])
-  });
-
-  return dayInterviewers;
+  return getDailyInfo(state, day, state.interviewers);
 };
