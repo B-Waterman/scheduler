@@ -19,7 +19,25 @@ Interview Scheduler is a SPA (Single Page Application) where you can create, edi
 
 ## Setup
 
+Clone this repository with
+```sh
+git clone git@github.com:B-Waterman/scheduler.git
+```
+
+This project utilises an API server found [here](https://github.com/B-Waterman/scheduler-api). Please clone this repository and follow the setup instructions found in the README.
+
 Install dependencies with `npm install`.
+
+## Project Dependencies
+* axios: "^0.20.0"
+* classnames: "^2.2.6"
+* normalize.css: "^8.0.1"
+* react: "^16.9.0"
+* react-dom: "^16.9.0"
+* react-script: "3.4.4"
+* sass: "^1.53.0"
+
+---
 
 ## Running Webpack Development Server
 
